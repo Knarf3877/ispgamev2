@@ -8,12 +8,10 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
-	[SerializeField] Image healthbarImage;
-	[SerializeField] GameObject ui;
-
+	[SerializeField] Image healthbarImage, shieldbarImage;
+	[SerializeField] GameObject ui, scoreText, weaponText, livesTest;
 	[SerializeField] GameObject cameraHolder;
 
-	[SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
 
 	[SerializeField] Item[] items;
 
@@ -45,14 +43,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 	private float activeSpeed;
 	private float vertAxis;
 	private float thrustIncrement;
-	static public float throttle;
+	float throttle;
 	private float activeSideSpeed;
 	private float activeVertSpeed;
 	static public float totalSpeed;
 	static public float warpMulti = 1;
 	static public bool warping;
-	static public float warpFuel = 100f;
-	static public float defaultWarpFuel;
+	const float maxWarpFuel = 100f;
+	public float warpFuel = maxWarpFuel;
+
 
 	private float forwardAccerleration = 2;
 	private float otherAccerleration = 1.25f;
@@ -65,6 +64,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 	public float rollSpeed = 100;
 	public float rollAccerleration = 4;
 	private float rollInput;
+
+
+	Transform player;
+	public Camera cam;
+	public float staticCursorDistance = 500f;
+	public Image activeCursor, staticCursor;
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -87,6 +92,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 		}
 		screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
 		isImmune = false;
+		StartCoroutine(AutoRefuel());
+		Debug.Log("Refueling active");
+		player = this.transform;
 	}
 
 	void Update()
@@ -136,8 +144,8 @@ void FixedUpdate()
 		totalSpeed = Mathf.Sqrt((activeSpeed * activeSpeed) + (activeSideSpeed * activeSideSpeed) + (activeVertSpeed * activeVertSpeed));
 		totalSpeed = Mathf.Round(totalSpeed * 10);
 
-		//PlayerWarp();
-
+		PlayerWarp();
+		updateHUD();
 
 		if (Input.GetKey(KeyCode.B))
 		{
@@ -243,7 +251,8 @@ void FixedUpdate()
 
         }
 
-    }
+
+	}
 
 	void OnCollisionEnter(Collision collision)
 	{
@@ -261,9 +270,9 @@ void FixedUpdate()
 			playerManager.Die();
 			//collision.gameObject.GetComponent<EnemyStats>().DestroySelf();
 		}
-		else if (collision.gameObject.tag == "Player" && collision.gameObject != rb.gameObject)
+		else if (collision.gameObject.tag == "Player" && collision.gameObject != rb.gameObject && rb != null)
         {
-			PV.RPC("RPC_TakeDamage", RpcTarget.All, 30, true);
+			TakeDamage(30);
 			return;
 
 		}
@@ -281,23 +290,41 @@ void FixedUpdate()
 				currentShield = 0;
 			}
 		}
-		Debug.Log(currentHealth);
-		healthbarImage.fillAmount = currentHealth / maxHealth;
+		updateHUD();
+		Debug.Log("health: " + currentHealth + "shield: " + currentShield);
 		isImmune = true;
 		Invoke("NoMoreImmunity", 2f);
+		if (currentHealth <= 0 )
+		{
+			Die();
+		}
 	}
 	void NoMoreImmunity()
 	{
 		isImmune = false;
 	}
+	public void HealHealth(float hp)
+    {
+		if(currentHealth != 100)
+        {
+			currentHealth += hp;
+			currentHealth = Mathf.Clamp(currentHealth, 0, 100);
+        }else if(currentShield != 100)
+        {
+			currentShield += hp;
+			currentShield = Mathf.Clamp(currentShield, 0, 100);
+        }
 
+
+	}
 	public void TakeDamage(float damage)
 	{
-		PV.RPC("RPC_TakeDamage", RpcTarget.All, damage, false);
+		PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
 	}
 
+
 	[PunRPC]
-	void RPC_TakeDamage(float damage, bool isCollision)
+	void RPC_TakeDamage(float damage)
 	{
 		if(!PV.IsMine)
 			return;
@@ -317,16 +344,74 @@ void FixedUpdate()
 
 		}
 
-		healthbarImage.fillAmount = currentHealth / maxHealth;
-
-		if(currentHealth <= 0 || isCollision == true)
+		if (currentHealth <= 0)
 		{
 			Die();
 		}
 	}
-
+	void updateHUD()
+    {
+		scoreText.GetComponent<Text>().text = totalSpeed.ToString("F0") + " mph" +
+			//   "\n" + avgFrameRate + " fps" +
+			"\n" + warpFuel.ToString("F0") + " : fuel left" +
+			"\n" + throttle.ToString("F3") //+
+			//"\n" + EnemyStats.totalDeaths.ToString("F0") + " : enemies killed";
+			//weaponText.GetComponent<TextMeshProUGUI>().text = WeaponName(LaserFire.currentWeapon) +
+			//   "\n" + LaserFire.currentWeaponAmmo.ToString("F0");
+		;
+		healthbarImage.fillAmount = currentHealth / 100;
+		shieldbarImage.fillAmount = currentShield / 100;
+	}
+	public IEnumerator AutoRefuel()
+	{
+		yield return new WaitForSeconds(1f);
+		while (true)
+		{
+			if (warpFuel < 10 && PlayerController.warping == false)
+			{
+				yield return new WaitForSeconds(.8f);
+				warpFuel++;
+			}
+			else if (warpFuel < 30 && PlayerController.warping == false)
+			{
+				yield return new WaitForSeconds(.45f);
+				warpFuel++;
+			}
+			else
+			{
+				yield return null;
+			}
+		}
+	}
 	void Die()
 	{
+
 		playerManager.Die();
+	}
+
+    public void LateUpdate()
+    {
+		if (player != null && cam != null)
+		{
+			Vector3 staticPos = (player.forward * staticCursorDistance) + player.position;
+			Vector3 screenPos = cam.WorldToScreenPoint(staticPos);
+			screenPos.z -= 10f;
+
+			staticCursor.transform.position = Vector3.Lerp(staticCursor.transform.position, screenPos, Time.deltaTime * 6f);
+		}
+		if (activeCursor != null && player != null)
+		{
+			activeCursor.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - 24f, Input.mousePosition.z);
+		}
+
+		if (PlayerController.warping == true && staticCursor != null)
+		{
+
+			staticCursor.gameObject.SetActive(false);
+		}
+		else if (staticCursor != null)
+		{
+			staticCursor.gameObject.SetActive(true);
+		}
 	}
 }

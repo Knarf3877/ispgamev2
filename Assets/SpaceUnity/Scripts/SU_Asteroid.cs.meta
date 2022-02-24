@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e39d3efc43fa722439f605c7a16258c0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - meshLowPoly: {fileID: -5178661895559278292, guid: b27b5d116dd538e42bf6866db49d7e14,
+      type: 3}
+  - meshMediumPoly: {fileID: -5178661895559278292, guid: 2f51652ba34c20f4a8e8fa346a336e62,
+      type: 3}
+  - meshHighPoly: {fileID: -5178661895559278292, guid: 0fb465f747765ab459c534ddb9212636,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

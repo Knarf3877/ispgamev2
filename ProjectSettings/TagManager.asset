@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Camera
+  - Fuel
+  - Ammo
+  - Health
+  - SpaceScene_Galaxy
+  - SpaceScene_Nebula
+  - SpaceScene_LocalStar
+  - SpaceScene_Camera
+  - SpaceScene_Planet
+  - SpaceScene_Moon
   layers:
   - Default
   - TransparentFX
@@ -25,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - DeepSpace
   - 
   - 
   - 
