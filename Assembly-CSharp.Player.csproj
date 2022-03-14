@@ -56,18 +56,22 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Shaders\CameraOverlay.cs" />
     <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\ShotBehavior.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_Asteroid.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_SpaceSceneSwitcher.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\opacityWithMove.cs" />
     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Spawnpoint.cs" />
     <Compile Include="Assets\Scripts\RoomListItem.cs" />
     <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CannonBehavior.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\fillWithMove.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_Planet.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_AsteroidField.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\RoomManager.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\canvasLayerMove.cs" />
     <Compile Include="Assets\Scripts\ItemInfo.cs" />
     <Compile Include="Assets\Scripts\SingleShotGun.cs" />
     <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CreateSinShapedLineStrip.cs" />
@@ -75,14 +79,19 @@
     <Compile Include="Assets\Scripts\GunInfo.cs" />
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_LaserShot.cs" />
     <Compile Include="Assets\Scripts\Billboard.cs" />
+    <Compile Include="Assets\Scripts\CursorSight.cs" />
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_LaserImpact.cs" />
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_Spaceship.cs" />
     <Compile Include="Assets\Scripts\Launcher.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\blink.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\rotateWithMove.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_AsteroidFadeOrigin.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_Moon.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\angleToHUD.cs" />
     <Compile Include="Assets\PlayerNameManager.cs" />
     <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
     <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\VolumetricMultiLineBehavior.cs" />
@@ -93,6 +102,7 @@
     <Compile Include="Assets\Scripts\Gun.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_TravelWarp.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
+    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\slideWithMove.cs" />
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_SpaceSceneSwitcherDemoGUI.cs" />
     <Compile Include="Assets\UsernameDisplay.cs" />
     <Compile Include="Assets\Scripts\ItemCollection.cs" />
@@ -101,22 +111,13 @@
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_CameraFollow.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_StaticStars.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\slideWithMove.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\fillWithMove.cs" />
-    <Compile Include="Assets\Shaders\CameraOverlay.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\blink.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\rotateWithMove.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\opacityWithMove.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\canvasLayerMove.cs" />
-    <Compile Include="Assets\VR HUD - Sterile Future\Scripts\angleToHUD.cs" />
-    <Compile Include="Assets\Scripts\CursorSight.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\SpaceUnity\Shaders\PlanetStandard.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\SpaceUnity\Shaders\PlanetRings.shader" />
+    <None Include="Assets\Sprites\SpaceCombatKit\Scripts\HologramShaders\Hologram.shader" />
     <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\_LineStripShader.cginc" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
@@ -151,10 +152,12 @@
     <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\LineStrip-LightSaber.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\SingleLine-LightSaber.shader" />
+    <None Include="Assets\Sprites\SpaceCombatKit\Scripts\HologramShaders\HologramOutlined.shader" />
     <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Sprites\SpaceCombatKit\HUD\FillShader.shader" />
     <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
@@ -361,6 +364,9 @@
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.quicksearch">
+      <HintPath>Library\ScriptAssemblies\com.unity.quicksearch.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -369,6 +375,9 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="PhotonUnityNetworking.Editor">
       <HintPath>Library\ScriptAssemblies\PhotonUnityNetworking.Editor.dll</HintPath>
@@ -387,12 +396,6 @@
     </Reference>
     <Reference Include="PhotonUnityNetworking.Utilities.Culling.Editor">
       <HintPath>Library\ScriptAssemblies\PhotonUnityNetworking.Utilities.Culling.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.quicksearch">
-      <HintPath>Library\ScriptAssemblies\com.unity.quicksearch.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
       <HintPath>Assets\Photon\PhotonLibs\Photon3Unity3D.dll</HintPath>

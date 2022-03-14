@@ -9,7 +9,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
 	[SerializeField] Image healthbarImage, shieldbarImage;
-	[SerializeField] GameObject ui, scoreText, weaponText, livesTest;
+	[SerializeField] GameObject ui, scoreText, weaponText, livesTest, fuelbarImage, throttlebarImage;
 	[SerializeField] GameObject cameraHolder;
 
 
@@ -361,8 +361,10 @@ void FixedUpdate()
 		;
 		healthbarImage.fillAmount = currentHealth / 100;
 		shieldbarImage.fillAmount = currentShield / 100;
+		throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", throttle / 100);
+		fuelbarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", warpFuel / 100);
 	}
-	public IEnumerator AutoRefuel()
+	IEnumerator AutoRefuel()
 	{
 		yield return new WaitForSeconds(1f);
 		while (true)
