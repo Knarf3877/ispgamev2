@@ -19,6 +19,7 @@ ScriptsOnlyBuild:
     - SpawnManager
     - Spawnpoint
     - UsernameDisplay
+    - VolumetricLines.VolumetricLineBehavior
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
     - Cinemachine.CinemachineComposer
@@ -88,11 +89,11 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 2118}
+      Script: {instanceID: 2176}
     - Class: 114
-      Script: {instanceID: 4354}
+      Script: {instanceID: 4578}
     - Class: 114
-      Script: {instanceID: 4516}
+      Script: {instanceID: 4762}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -137,87 +138,87 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1502}
+      Script: {instanceID: 1510}
     - Class: 114
-      Script: {instanceID: 1586}
+      Script: {instanceID: 1512}
     - Class: 114
-      Script: {instanceID: 1696}
+      Script: {instanceID: 1606}
     - Class: 114
-      Script: {instanceID: 1746}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 1844}
+      Script: {instanceID: 1774}
     - Class: 114
-      Script: {instanceID: 1868}
+      Script: {instanceID: 1880}
     - Class: 114
-      Script: {instanceID: 1912}
+      Script: {instanceID: 1904}
     - Class: 114
-      Script: {instanceID: 2160}
+      Script: {instanceID: 1952}
     - Class: 114
-      Script: {instanceID: 2172}
+      Script: {instanceID: 2222}
     - Class: 114
-      Script: {instanceID: 2188}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 2360}
+      Script: {instanceID: 2252}
     - Class: 114
-      Script: {instanceID: 2484}
+      Script: {instanceID: 2436}
     - Class: 114
-      Script: {instanceID: 2518}
+      Script: {instanceID: 2572}
     - Class: 114
-      Script: {instanceID: 2586}
+      Script: {instanceID: 2610}
     - Class: 114
-      Script: {instanceID: 2596}
+      Script: {instanceID: 2680}
     - Class: 114
-      Script: {instanceID: 2658}
+      Script: {instanceID: 2690}
     - Class: 114
-      Script: {instanceID: 2706}
+      Script: {instanceID: 2754}
     - Class: 114
-      Script: {instanceID: 2730}
+      Script: {instanceID: 2808}
     - Class: 114
-      Script: {instanceID: 2768}
+      Script: {instanceID: 2834}
     - Class: 114
-      Script: {instanceID: 2832}
+      Script: {instanceID: 2874}
     - Class: 114
-      Script: {instanceID: 2840}
+      Script: {instanceID: 2950}
     - Class: 114
-      Script: {instanceID: 2854}
-    - Class: 114
-      Script: {instanceID: 2954}
-    - Class: 114
-      Script: {instanceID: 3068}
+      Script: {instanceID: 2960}
     - Class: 114
       Script: {instanceID: 3076}
     - Class: 114
-      Script: {instanceID: 3172}
+      Script: {instanceID: 3204}
     - Class: 114
-      Script: {instanceID: 3348}
+      Script: {instanceID: 3212}
     - Class: 114
-      Script: {instanceID: 3424}
+      Script: {instanceID: 3320}
     - Class: 114
-      Script: {instanceID: 3480}
+      Script: {instanceID: 3506}
     - Class: 114
-      Script: {instanceID: 4018}
+      Script: {instanceID: 3592}
     - Class: 114
-      Script: {instanceID: 4134}
+      Script: {instanceID: 3656}
     - Class: 114
-      Script: {instanceID: 4272}
+      Script: {instanceID: 4226}
     - Class: 114
-      Script: {instanceID: 4292}
+      Script: {instanceID: 4346}
     - Class: 114
-      Script: {instanceID: 4484}
+      Script: {instanceID: 4494}
     - Class: 114
-      Script: {instanceID: 4602}
+      Script: {instanceID: 4514}
     - Class: 114
-      Script: {instanceID: 4604}
+      Script: {instanceID: 4730}
     - Class: 114
-      Script: {instanceID: 4636}
+      Script: {instanceID: 4854}
     - Class: 114
-      Script: {instanceID: 4754}
+      Script: {instanceID: 4856}
     - Class: 114
-      Script: {instanceID: 4774}
+      Script: {instanceID: 4896}
     - Class: 114
-      Script: {instanceID: 4838}
+      Script: {instanceID: 5030}
     - Class: 114
-      Script: {instanceID: 4972}
+      Script: {instanceID: 5054}
+    - Class: 114
+      Script: {instanceID: 5124}
+    - Class: 114
+      Script: {instanceID: 5274}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -251,6 +252,12 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
+      Hash: ae83e830e7a90c0aff918c4c2e520825
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GraphicRaycaster
+  - hash:
+      serializedVersion: 2
       Hash: 24f79094aff162c9aa69c31d64d777d3
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -279,6 +286,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine.PostFX
     className: CinemachineVolumeSettings
+  - hash:
+      serializedVersion: 2
+      Hash: f2c44efc3b0acf9b70ebc13189a47533
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CameraOverlay
   - hash:
       serializedVersion: 2
       Hash: 77aaaaa51f7a8d8ff333a879741e47d2
@@ -363,6 +376,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
+  - hash:
+      serializedVersion: 2
+      Hash: 36c9362b93f50c81cead582a4f28a7c5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: opacityWithMove
   - hash:
       serializedVersion: 2
       Hash: 300fd99066f8c288e85f5e81ce65fe34
@@ -459,6 +478,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PunPlayerScores
+  - hash:
+      serializedVersion: 2
+      Hash: 1191744251960b3c0820717a934970db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: fillWithMove
   - hash:
       serializedVersion: 2
       Hash: c1d728126ff1918728036c59106d32b2
@@ -563,6 +588,12 @@ ScriptsOnlyBuild:
     className: EventSystem
   - hash:
       serializedVersion: 2
+      Hash: 7c8d2540a2f47a1b13917b597cb92057
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: canvasLayerMove
+  - hash:
+      serializedVersion: 2
       Hash: fe64a45214940b510a0ec79c96d43498
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -653,12 +684,6 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: ae83e830e7a90c0aff918c4c2e520825
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: GraphicRaycaster
-  - hash:
-      serializedVersion: 2
       Hash: f40fedccd4adbc76605bea6d67537e4b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -717,6 +742,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: Cinemachine3rdPersonFollow
+  - hash:
+      serializedVersion: 2
+      Hash: 128fc457d6e652c3433437bf9aec9f79
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CursorSight
   - hash:
       serializedVersion: 2
       Hash: 57d2b3ca58a430f7cf319bb757c1f0f5
@@ -779,12 +810,6 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 0fd6822f6177297bd0eb4d83cc7a9030
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: ToggleGroup
-  - hash:
-      serializedVersion: 2
       Hash: b639d97cb780d0d99a2bfb3ad1935732
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -801,6 +826,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Button
+  - hash:
+      serializedVersion: 2
+      Hash: 0fd6822f6177297bd0eb4d83cc7a9030
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ToggleGroup
   - hash:
       serializedVersion: 2
       Hash: b556140a439bf3afc12d084672d74c39
@@ -839,13 +870,25 @@ ScriptsOnlyBuild:
     className: CinemachineSmoothPath
   - hash:
       serializedVersion: 2
+      Hash: 7bc3068c834e571cbfb830779ade5db3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: blink
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 4c141dabfc58246ef0cd5defd62e46be
+      Hash: 053ba2418402f5a360524bb581aa4085
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MouseLook
+  - hash:
+      serializedVersion: 2
+      Hash: b926eceefd2cb41d1aec04127970acf3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -947,6 +990,12 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
+      Hash: 3c86090ed9d0522c260853bbd1e446ac
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: rotateWithMove
+  - hash:
+      serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1029,6 +1078,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineTrackedDolly
+  - hash:
+      serializedVersion: 2
+      Hash: cd1c8fae5be9b69d0f6d730fd84b345d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: angleToHUD
   - hash:
       serializedVersion: 2
       Hash: 5ae36aa27e46b25633847fc7cb6b5c87
@@ -1253,6 +1308,12 @@ ScriptsOnlyBuild:
     className: GroupWeightManipulator
   - hash:
       serializedVersion: 2
+      Hash: 902067383d439064b0d1f6108d327977
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: slideWithMove
+  - hash:
+      serializedVersion: 2
       Hash: 3af362bdbd40740204fb96594c992a60
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1425,68 +1486,8 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PhotonTeamsManager
-  - hash:
-      serializedVersion: 2
-      Hash: 902067383d439064b0d1f6108d327977
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: slideWithMove
-  - hash:
-      serializedVersion: 2
-      Hash: 1191744251960b3c0820717a934970db
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: fillWithMove
-  - hash:
-      serializedVersion: 2
-      Hash: f2c44efc3b0acf9b70ebc13189a47533
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CameraOverlay
-  - hash:
-      serializedVersion: 2
-      Hash: 7bc3068c834e571cbfb830779ade5db3
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: blink
-  - hash:
-      serializedVersion: 2
-      Hash: 3c86090ed9d0522c260853bbd1e446ac
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: rotateWithMove
-  - hash:
-      serializedVersion: 2
-      Hash: 053ba2418402f5a360524bb581aa4085
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MouseLook
-  - hash:
-      serializedVersion: 2
-      Hash: 36c9362b93f50c81cead582a4f28a7c5
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: opacityWithMove
-  - hash:
-      serializedVersion: 2
-      Hash: 7c8d2540a2f47a1b13917b597cb92057
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: canvasLayerMove
-  - hash:
-      serializedVersion: 2
-      Hash: cd1c8fae5be9b69d0f6d730fd84b345d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: angleToHUD
-  - hash:
-      serializedVersion: 2
-      Hash: 128fc457d6e652c3433437bf9aec9f79
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CursorSight
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/yunyu/Downloads/multiplayer/folder/Space Game (but multiplayer).exe
+  playerPath: C:/Users/yunyu/Downloads/multiplayer/Game v2/Space Game (but multiplayer).exe

@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
 	[SerializeField] Image healthbarImage, shieldbarImage;
 	[SerializeField] GameObject ui, scoreText, weaponText, livesTest, fuelbarImage, throttlebarImage;
+	[SerializeField] GameObject mainEngine, mainEngineInput, reverseEngine, reverseEngineInput, warpEngine;
 	[SerializeField] GameObject cameraHolder;
 
+	AudioSource warpSound;
+	float warpMaxVolume = 0.4f;
 
 	[SerializeField] Item[] items;
 
@@ -19,7 +22,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 	int previousItemIndex = -1;
 
 	float verticalLookRotation;
-	bool grounded;
 	Vector3 smoothMoveVelocity;
 	Vector3 moveAmount;
 
@@ -95,6 +97,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 		StartCoroutine(AutoRefuel());
 		Debug.Log("Refueling active");
 		player = this.transform;
+		mainEngine.SetActive(false);
+		reverseEngine.SetActive(false);
+		warpEngine.SetActive(false);
+		warpSound = GetComponent<AudioSource>();
+		warpSound.loop = true;
+		warpSound.volume = warpMaxVolume;
+		warpSound.mute = true;
+		warpSound.Play();
 	}
 
 	void Update()
@@ -102,6 +112,35 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 		if(!PV.IsMine)
 			return;
 
+		if (throttle > 0.001)
+		{
+			mainEngine.SetActive(true);
+			reverseEngine.SetActive(false);
+		}
+		else if (throttle < -0.001)
+		{
+			mainEngine.SetActive(false);
+			reverseEngine.SetActive(true);
+		}
+		else
+		{
+			mainEngine.SetActive(false);
+			reverseEngine.SetActive(false);
+		}
+
+		if (Input.GetKey(KeyCode.W))
+		{
+			mainEngineInput.SetActive(true);
+		}
+		else if (Input.GetKey(KeyCode.S))
+		{
+			reverseEngineInput.SetActive(true);
+		}
+		else
+		{
+			mainEngineInput.SetActive(false);
+			reverseEngineInput.SetActive(false);
+		}
 
 	}
 void FixedUpdate()
@@ -218,36 +257,36 @@ void FixedUpdate()
 			warping = true;
 			warpFuel -= .3f;
 			totalSpeed += 100;
-			//warpEngine.SetActive(true);
-			//if (warpSound.mute)
-			//{
-			//	warpSound.mute = false;
-			//}
-			//if (warpSound.volume < warpMaxVolume)
-			//{
-			//	warpSound.volume += 2f * Time.deltaTime;
-			//}
+			warpEngine.SetActive(true);
+            if (warpSound.mute)
+            {
+            	warpSound.mute = false;
+            }
+            if (warpSound.volume < warpMaxVolume)
+            {
+            	warpSound.volume += 2f * Time.deltaTime;
+            }
 
-		}
-		else  //(Input.GetKeyUp(KeyCode.G) || warpFuel <= 0)
+        }
+        else  //(Input.GetKeyUp(KeyCode.G) || warpFuel <= 0)
 		{
 			//gameObject.GetComponent<SU_TravelWarp>().Warp = false;
 			//mainCamera.SetActive(true);
 			mouseLookSpeed = 300f;
 			warping = false;
-			//warpEngine.SetActive(false);
+			warpEngine.SetActive(false);
 			if (warpMulti != 1f)
 			{
 				warpMulti = 1f;
 			}
-            //if (warpSound.volume > 0.001f)
-            //{
-            //	warpSound.volume -= 5f * Time.deltaTime;
-            //}
-            //else
-            //{
-            //	warpSound.mute = true;
-            //}
+            if (warpSound.volume > 0.001f)
+            {
+            	warpSound.volume -= 5f * Time.deltaTime;
+            }
+            else
+            {
+            	warpSound.mute = true;
+            }
 
         }
 
@@ -361,8 +400,9 @@ void FixedUpdate()
 		;
 		healthbarImage.fillAmount = currentHealth / 100;
 		shieldbarImage.fillAmount = currentShield / 100;
-		throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", throttle / 100);
-		fuelbarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", warpFuel / 100);
+		//Debug.Log(throttlebarImage.GetComponent<Renderer>().material.GetFloat("Fill Amount"));
+		throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", throttle);
+		fuelbarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", warpFuel / 200);
 	}
 	IEnumerator AutoRefuel()
 	{
