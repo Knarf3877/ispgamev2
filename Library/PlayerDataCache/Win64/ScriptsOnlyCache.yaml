@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - Billboard
     - GunInfo
+    - HitDetection
     - ItemCollection
     - Launcher
     - Menu
@@ -129,9 +130,17 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -196,6 +205,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3656}
     - Class: 114
+      Script: {instanceID: 3748}
+    - Class: 114
       Script: {instanceID: 4226}
     - Class: 114
       Script: {instanceID: 4346}
@@ -219,11 +230,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5124}
     - Class: 114
       Script: {instanceID: 5274}
+    - Class: 114
+      Script: {instanceID: 59198}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
       Script: {instanceID: 0}
     - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -240,6 +255,12 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 241
+      Script: {instanceID: 0}
+    - Class: 243
+      Script: {instanceID: 0}
+    - Class: 245
       Script: {instanceID: 0}
     - Class: 850595691
       Script: {instanceID: 0}
@@ -888,7 +909,7 @@ ScriptsOnlyBuild:
     className: MouseLook
   - hash:
       serializedVersion: 2
-      Hash: b926eceefd2cb41d1aec04127970acf3
+      Hash: 3a4bb91dbfc1bf16989c4e1837e5fe5a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1486,6 +1507,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PhotonTeamsManager
+  - hash:
+      serializedVersion: 2
+      Hash: 929bc3edb4bfc29d7e1e5a28318a151f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HitDetection
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity

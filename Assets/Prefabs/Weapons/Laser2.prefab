@@ -53,6 +53,7 @@ MeshRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,6 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &3305964
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,17 +145,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 122648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a1afcfea7b3644aa11b15cc68750a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0565e295b774a5640a9a8139f5f3e201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explodeFX: {fileID: 4575031014204910254, guid: b8dc0cba495a10c47a7fe5b98e39ff19,
-    type: 3}
-  lifeTime: 3
+  explodeFX: {fileID: 0}
+  lifeTime: 4
   hitMask:
     serializedVersion: 2
-    m_Bits: 38711
-  damage: 50
-  adjustLaser: 1
+    m_Bits: 4294967295
+  damage: 10
+  adjustLaser: 0
 --- !u!108 &-4059889833254129671
 Light:
   m_ObjectHideFlags: 0
@@ -213,6 +214,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1622168440220374802
@@ -262,6 +264,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

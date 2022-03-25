@@ -111,6 +111,7 @@
     <Compile Include="Assets\SpaceUnity\_Demo\Scrips\SU_CameraFollow.cs" />
     <Compile Include="Assets\SpaceUnity\Scripts\SU_StaticStars.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
+    <Compile Include="Assets\Scripts\HitDetection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

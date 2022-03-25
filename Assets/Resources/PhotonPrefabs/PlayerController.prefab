@@ -9865,8 +9865,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488053957094389959}
-  m_LocalRotation: {x: -0.016876945, y: -0.0000000050323354, z: 8.4942886e-11, w: 0.9998576}
-  m_LocalPosition: {x: 4.1633827e-17, y: 2.998291, z: -10.101247}
+  m_LocalRotation: {x: -0.016876945, y: 0.0000000018898534, z: 3.0969977e-11, w: 0.9998576}
+  m_LocalPosition: {x: -3.771753e-10, y: 2.998291, z: -10.101247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 761656393732856683}
@@ -10193,17 +10193,37 @@ MonoBehaviour:
   throttlebarImage: {fileID: 4356036006920515146}
   mainEngine: {fileID: 7955779816824554534}
   mainEngineInput: {fileID: 3959868198922329359}
-  mainEngineThrust: {fileID: 0}
   reverseEngine: {fileID: 1477291195231140545}
   reverseEngineInput: {fileID: 1026958048947479788}
-  reverseEngineThrust: {fileID: 0}
   warpEngine: {fileID: 4582403320835745181}
   cameraHolder: {fileID: 6149131234852570181}
+  leftBarrel: {fileID: 1918508840974743184}
+  rightBarrel: {fileID: 1918508840974743184}
+  mainBarrel: {fileID: 7335844817129732255}
+  mainBarrel2: {fileID: 7255097312760386797}
+  laser1Ammo: 100
+  laser2Ammo: 50
+  laser3Ammo: 200
+  laser4Ammo: 50
+  defaultLaser1Ammo: 0
+  defaultLaser2Ammo: 0
+  defaultLaser3Ammo: 0
+  defaultLaser4Ammo: 0
+  infiniteAmmo: 0
+  laser1: {fileID: -2445971630996320316, guid: d846f04f6b4b2274ea3f60acb66dcaca, type: 3}
+  laser1Force: 100
+  laser2: {fileID: -2445971630996320316, guid: 689bef69f4135284fa6958ca23917820, type: 3}
+  laser2Force: 0
+  laser3: {fileID: 3371096255179117199, guid: e630a8d1a6ec5854bb2523ab26ccaff3, type: 3}
+  laser3Force: 0
+  laser4: {fileID: -2445971630996320316, guid: 09a6d0244dd7f3c40a758aee70911b59, type: 3}
+  laser4Force: 0
   items:
   - {fileID: 6732414030161505931}
   - {fileID: 3968076902418886796}
   - {fileID: 3968076902418886796}
   - {fileID: 3968076902418886796}
+  currentHealth: 100
   isImmune: 0
   speed: 40
   sideSpeed: 10
@@ -15300,7 +15320,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062547088855628639}
-  m_LocalRotation: {x: 0.04184472, y: -0.000000012221946, z: -7.0849215e-11, w: 0.99912417}
+  m_LocalRotation: {x: 0.041844737, y: -0.00000001910704, z: 1.5572785e-10, w: 0.99912417}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26403,7 +26423,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4522688422253444881}
-  m_LocalRotation: {x: -0.041266657, y: 0.0000000050287654, z: 2.0769689e-10, w: 0.99914825}
+  m_LocalRotation: {x: -0.04126665, y: -0.0000000018848583, z: -1.4076221e-10, w: 0.99914825}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -31580,8 +31600,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5510352765333865712}
-  m_LocalRotation: {x: 0.0000000055879354, y: 0.000000005033052, z: -3.7150934e-16,
-    w: 1}
+  m_LocalRotation: {x: 0.0000000037252903, y: -2.7477687e-11, z: 2.0435043e-15, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
