@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     AudioSource warpSound;
     float warpMaxVolume = 0.4f;
 
-    [SerializeField] GameObject leftBarrel, rightBarrel, mainBarrel, mainBarrel2;
+    [SerializeField] GameObject leftBarrel, rightBarrel, mainBarrel, mainBarrel2, mainBarrel3;
     Vector3 shootFromBarrel;
     int shootOrder;
     static public int currentWeapon;
@@ -37,38 +37,34 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public HitDetection laser1;
     ParticleSystem laser1FXLeft;
-    private ParticleSystem laser1FXRight;
-    public float laser1Force;
+    ParticleSystem laser1FXRight;
+    float laser1Force = 1000f;
     float laser1FireRate = .2f;
     float l1Spread = 0.15f;
 
     public HitDetection laser2;
-     ParticleSystem laser2FX;
-    public float laser2Force;
+    ParticleSystem laser2FX;
+    float laser2Force = 1500f;
     float laser2FireRate = .4f;
-     float l2Spread = 0f;
+    float l2Spread = 0f;
 
     public HitDetection laser3;
     private ParticleSystem laser3FX;
-    public float laser3Force;
-     float laser3FireRate = .12f;
-     float l3Spread = 0.5f;
+    float laser3Force = 1000f;
+    float laser3FireRate = .12f;
+    float l3Spread = 0.5f;
 
     public HitDetection laser4;
-     ParticleSystem laser4FX;
-    public float laser4Force;
-     float laser4FireRate = .5f;
-     float l4Spread = 1.5f;
+    ParticleSystem laser4FX;
+    float laser4Force = 1000f;
+    float laser4FireRate = .5f;
+    float l4Spread = 4f;
 
 
     [SerializeField] Item[] items;
 
     int itemIndex;
     int previousItemIndex = -1;
-
-    float verticalLookRotation;
-    Vector3 smoothMoveVelocity;
-    Vector3 moveAmount;
 
     Rigidbody rb;
 
@@ -129,7 +125,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         if (PV.IsMine)
         {
-            
+
         }
         else
         {
@@ -142,7 +138,19 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         StartCoroutine(AutoRefuel());
         Debug.Log("Refueling active");
         player = this.transform;
+
         currentWeapon = 1;
+        currentWeaponAmmo = laser1Ammo;
+        laser1FXLeft = leftBarrel.GetComponent<ParticleSystem>();
+        laser1FXRight = rightBarrel.GetComponent<ParticleSystem>();
+        laser2FX = mainBarrel.GetComponent<ParticleSystem>();
+        laser3FX = mainBarrel3.GetComponent<ParticleSystem>();
+        laser4FX = mainBarrel2.GetComponent<ParticleSystem>();
+        defaultLaser1Ammo = laser1Ammo;
+        defaultLaser2Ammo = laser2Ammo;
+        defaultLaser3Ammo = laser3Ammo;
+        defaultLaser4Ammo = laser4Ammo;
+
         mainEngine.SetActive(false);
         reverseEngine.SetActive(false);
         warpEngine.SetActive(false);
@@ -292,6 +300,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                     {
                         if (Time.time > laser1FireRate + timeLastFired)
                         {
+                            leftBarrel.GetComponent<AudioSource>().Play();
                             FireLaser1();
                             timeLastFired = Time.time;
                         }
@@ -302,6 +311,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                     {
                         if (Time.time > laser2FireRate + timeLastFired)
                         {
+                            mainBarrel.GetComponent<AudioSource>().Play();
                             FireLaser2();
                             timeLastFired = Time.time;
                         }
@@ -312,6 +322,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                     {
                         if (Time.time > laser3FireRate + timeLastFired)
                         {
+                            mainBarrel3.GetComponent<AudioSource>().Play();
                             FireLaser3();
                             timeLastFired = Time.time;
                         }
@@ -322,6 +333,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                     {
                         if (Time.time > laser4FireRate + timeLastFired)
                         {
+                            mainBarrel2.GetComponent<AudioSource>().Play();
                             FireLaser4();
                             timeLastFired = Time.time;
                         }
@@ -537,13 +549,13 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             case 0:
                 shootFromBarrel = leftBarrel.transform.position + transform.forward * 5f;
                 shootOrder++;
-               // laser1FXLeft.Play();
+                laser1FXLeft.Play();
                 break;
 
             case 1:
                 shootFromBarrel = rightBarrel.transform.position + transform.forward * 5f;
                 shootOrder--;
-               // laser1FXRight.Play();
+                laser1FXRight.Play();
                 break;
         }
         var hitDetection = Instantiate(laser1, shootFromBarrel, leftBarrel.transform.rotation);
@@ -561,8 +573,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     void FireLaser3()
     {
         laser3FX.Play();
-        var hitDetection = Instantiate(laser3, mainBarrel2.transform.position + transform.forward * 2f, mainBarrel2.transform.rotation);
-        hitDetection.Fire(mainBarrel2.transform.position + transform.forward * 2f, mainBarrel2.transform.rotation, laser3Force, l3Spread);
+        var hitDetection = Instantiate(laser3, mainBarrel3.transform.position + transform.forward * 2f, mainBarrel3.transform.rotation);
+        hitDetection.Fire(mainBarrel3.transform.position + transform.forward * 2f, mainBarrel3.transform.rotation, laser3Force, l3Spread);
         UseAmmo(3);
     }
 
@@ -571,7 +583,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         laser4FX.Play();
         for (int i = 0; i <= 10; i++)
         {
-            var hitDetection = Instantiate(laser4, mainBarrel2.transform.position + transform.forward * 6f, mainBarrel2.transform.rotation);
+            Vector3 position = new Vector3(mainBarrel2.transform.position.x + transform.forward.x * 6f + Random.Range(0, .04f), mainBarrel2.transform.position.y + transform.forward.y * 6f + Random.Range(0, .04f), mainBarrel2.transform.position.z + transform.forward.z * 6f + Random.Range(0, .04f));
+            var hitDetection = Instantiate(laser4, position, mainBarrel2.transform.rotation);
             hitDetection.Fire(mainBarrel2.transform.position + transform.forward * 6f, mainBarrel2.transform.rotation, laser4Force, l4Spread);
         }
         UseAmmo(4);

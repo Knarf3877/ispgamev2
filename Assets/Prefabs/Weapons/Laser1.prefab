@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1465546750242220220}
   - component: {fileID: 4022174301588615246}
   - component: {fileID: 130251040123206331}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Laser1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,13 +32,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122648}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.97, y: 3.017, z: 3}
   m_LocalScale: {x: 0.0702799, y: 0.08041964, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2397960
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_templateMaterial: {fileID: 2100000, guid: 974b33ccbd786464a825203eb88b8dab, type: 2}
   m_doNotOverwriteTemplateMaterialProperties: 0
-  m_startPos: {x: 0, y: 100, z: 0}
+  m_startPos: {x: 0, y: 0, z: 100}
   m_endPos: {x: 0, y: 0, z: 0}
   m_lineColor: {r: 0, g: 1, b: 1, a: 1}
   m_lineWidth: 20
@@ -119,8 +119,8 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 2.07
   m_Height: 101.25823
-  m_Direction: 1
-  m_Center: {x: 0, y: 50.629116, z: 0}
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 50}
 --- !u!114 &-2445971630996320316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0565e295b774a5640a9a8139f5f3e201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explodeFX: {fileID: 0}
+  explodeFX: {fileID: 4575031014204910254, guid: 6676450c25946364f81fb6a04134981d,
+    type: 3}
   lifeTime: 4
   hitMask:
     serializedVersion: 2
@@ -235,7 +236,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 0
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
