@@ -4,12 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using TMPro;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] Image healthbarImage, shieldbarImage;
-    [SerializeField] GameObject ui, scoreText, weaponText, livesTest, fuelbarImage, throttlebarImage;
+    [SerializeField] GameObject ui, sfx, scoreText, weaponText, livesTest, fuelbarImage, throttlebarImage;
     [SerializeField] GameObject mainEngine, mainEngineInput, reverseEngine, reverseEngineInput, warpEngine;
     [SerializeField] GameObject cameraHolder;
 
@@ -35,36 +37,21 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public bool infiniteAmmo = false;
 
-    public HitDetection laser1;
     ParticleSystem laser1FXLeft;
     ParticleSystem laser1FXRight;
-    float laser1Force = 1000f;
     float laser1FireRate = .2f;
-    float l1Spread = 0.15f;
 
-    public HitDetection laser2;
     ParticleSystem laser2FX;
-    float laser2Force = 1500f;
     float laser2FireRate = .4f;
-    float l2Spread = 0f;
 
-    public HitDetection laser3;
     private ParticleSystem laser3FX;
-    float laser3Force = 1000f;
     float laser3FireRate = .12f;
-    float l3Spread = 0.5f;
 
-    public HitDetection laser4;
     ParticleSystem laser4FX;
-    float laser4Force = 1000f;
     float laser4FireRate = .5f;
-    float l4Spread = 4f;
 
 
-    [SerializeField] Item[] items;
 
-    int itemIndex;
-    int previousItemIndex = -1;
 
     Rigidbody rb;
 
@@ -125,13 +112,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     {
         if (PV.IsMine)
         {
-
+            
         }
         else
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            
             Destroy(rb);
             Destroy(ui);
+            Destroy(sfx);
         }
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         isImmune = false;
@@ -345,7 +334,26 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     public void ApplyDamage(float damage)
     {
-        currentHealth -= damage;
+
+        if (isImmune == false)
+        {
+            if (currentShield >= damage)
+            {
+                currentShield -= damage;
+            }
+            else
+            {
+                currentShield -= damage;
+                currentHealth -= Mathf.Abs(currentShield);
+                currentShield = 0;
+            }
+
+        }
+
+        if (currentHealth <= 0)
+        {
+            playerManager.Die();
+        }
     }
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
@@ -445,7 +453,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         Invoke("NoMoreImmunity", 2f);
         if (currentHealth <= 0)
         {
-            Die();
+            playerManager.Die();
         }
     }
     void NoMoreImmunity()
@@ -496,7 +504,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
         if (currentHealth <= 0)
         {
-            Die();
+            playerManager.Die();
         }
     }
     void updateHUD()
@@ -504,16 +512,35 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         scoreText.GetComponent<Text>().text = totalSpeed.ToString("F0") + " mph" +
             //   "\n" + avgFrameRate + " fps" +
             "\n" + warpFuel.ToString("F0") + " : fuel left" +
-            "\n" + throttle.ToString("F3") //+
-                                           //"\n" + EnemyStats.totalDeaths.ToString("F0") + " : enemies killed";
-                                           //weaponText.GetComponent<TextMeshProUGUI>().text = WeaponName(LaserFire.currentWeapon) +
-                                           //   "\n" + LaserFire.currentWeaponAmmo.ToString("F0");
+            "\n" + throttle.ToString("F3")
         ;
+        weaponText.GetComponent<TextMeshProUGUI>().text = WeaponName(currentWeapon) +
+           "\n" + currentWeaponAmmo.ToString("F0");
         healthbarImage.fillAmount = currentHealth / 100;
         shieldbarImage.fillAmount = currentShield / 100;
-        //Debug.Log(throttlebarImage.GetComponent<Renderer>().material.GetFloat("Fill Amount"));
         throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", throttle);
         fuelbarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", warpFuel / 200);
+    }
+    string WeaponName(int weaponNum)
+    {
+        switch (weaponNum)
+        {
+            case 1:
+                return "Type 1";
+
+            case 2:
+                return "Type 2";
+             
+            case 3:
+                return "Type 3";
+
+            case 4:
+                return "Type 4";
+
+            default:
+                return "weapon not found";
+
+        }
     }
     IEnumerator AutoRefuel()
     {
@@ -536,12 +563,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             }
         }
     }
-    void Die()
-    {
-
-        playerManager.Die();
-    }
-
     void FireLaser1()
     {
         switch (shootOrder)
@@ -558,34 +579,28 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 laser1FXRight.Play();
                 break;
         }
-        var hitDetection = Instantiate(laser1, shootFromBarrel, leftBarrel.transform.rotation);
-        hitDetection.Fire(shootFromBarrel, leftBarrel.transform.rotation, laser1Force, l1Spread);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Laser1"), shootFromBarrel, leftBarrel.transform.rotation);
         UseAmmo(1);
     }
-
     void FireLaser2()
     {
         laser2FX.Play();
-        var hitDetection = Instantiate(laser2, mainBarrel.transform.position + transform.forward * 6f, mainBarrel.transform.rotation);
-        hitDetection.Fire(mainBarrel.transform.position + transform.forward * 6f, mainBarrel.transform.rotation, laser2Force, l2Spread);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Laser2"), mainBarrel.transform.position + transform.forward * 6f, mainBarrel.transform.rotation);
         UseAmmo(2);
     }
     void FireLaser3()
     {
         laser3FX.Play();
-        var hitDetection = Instantiate(laser3, mainBarrel3.transform.position + transform.forward * 2f, mainBarrel3.transform.rotation);
-        hitDetection.Fire(mainBarrel3.transform.position + transform.forward * 2f, mainBarrel3.transform.rotation, laser3Force, l3Spread);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Bullet1"), mainBarrel3.transform.position + transform.forward * 2f, mainBarrel3.transform.rotation);
         UseAmmo(3);
     }
-
     void FireLaser4()
     {
         laser4FX.Play();
-        for (int i = 0; i <= 10; i++)
+        for (int i = 0; i <= 8; i++)
         {
             Vector3 position = new Vector3(mainBarrel2.transform.position.x + transform.forward.x * 6f + Random.Range(0, .04f), mainBarrel2.transform.position.y + transform.forward.y * 6f + Random.Range(0, .04f), mainBarrel2.transform.position.z + transform.forward.z * 6f + Random.Range(0, .04f));
-            var hitDetection = Instantiate(laser4, position, mainBarrel2.transform.rotation);
-            hitDetection.Fire(mainBarrel2.transform.position + transform.forward * 6f, mainBarrel2.transform.rotation, laser4Force, l4Spread);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Laser3"), position, mainBarrel2.transform.rotation);
         }
         UseAmmo(4);
     }

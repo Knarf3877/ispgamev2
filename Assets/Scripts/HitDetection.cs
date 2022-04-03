@@ -1,17 +1,20 @@
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class HitDetection : MonoBehaviour
+using UnityEngine.UI;
+using System.IO;
+public class HitDetection : MonoBehaviourPunCallbacks
 {
     public ParticleSystem explodeFX;
     public float lifeTime = 4f;
-    private bool useFixedUpdate = true;
-    [SerializeField] private LayerMask hitMask = -1;
+    [SerializeField] LayerMask hitMask = -1;
 
+    [SerializeField] float laserForce, laserSpread;
     private Vector3 velocity = Vector3.forward;
     private float destructionTime = 0f;
-    private bool isFired = false;
+     bool isFired = false;
     private const float kVelocityMult = 1f;
     public float damage = 10f;
 
@@ -35,17 +38,16 @@ public class HitDetection : MonoBehaviour
     void FixedUpdate()
     {
         if (isFired == false)
-            return;
+            Fire(transform.position, transform.rotation, laserForce, laserSpread);
 
-        if (useFixedUpdate == true)
-        {
+
             MoveBullet(damage);
-        }
+
     }
 
-    public void Fire(Vector3 position, Quaternion rotation, float muzzleVelocity, float spread)
+    void Fire(Vector3 position, Quaternion rotation, float muzzleVelocity, float spread)
     {
-        transform.position = position;
+        transform.position = position + transform.forward * 6f;
         Vector3 spreadAngle = Vector3.zero;
         spreadAngle.x = Random.Range(-spread, spread);
         spreadAngle.y = Random.Range(-spread, spread);
@@ -61,10 +63,6 @@ public class HitDetection : MonoBehaviour
 
     public void MoveBullet(float damage)
     {
-        // Perform the raycast. Shoots a ray forwards of the bullet that covers all the distance
-        // that it will cover in this frame. This guarantees a hit in all but the most extenuating
-        // circumstances (against other extremely fast and small moving targets it may miss) and
-        // works at practically any bullet speed.
         RaycastHit rayHit;
         Ray velocityRay = new Ray(transform.position, velocity.normalized);
         bool rayHasHit = Physics.Raycast(velocityRay, out rayHit, velocity.magnitude * kVelocityMult * Time.deltaTime, hitMask);
@@ -78,7 +76,7 @@ public class HitDetection : MonoBehaviour
             if (target)
             {
                 print("Hit " + target.name + " with " + target.currentHealth + " HP left.");
-                target.ApplyDamage(damage);
+                target.TakeDamage(damage);
             }
 
             DestroyBullet(rayHit.point, true);

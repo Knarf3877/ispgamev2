@@ -2,7 +2,6 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Billboard
-    - GunInfo
     - HitDetection
     - ItemCollection
     - Launcher
@@ -16,7 +15,6 @@ ScriptsOnlyBuild:
     - RoomManager
     - SU_SpaceSceneCamera
     - SU_StaticStars
-    - SingleShotGun
     - SpawnManager
     - Spawnpoint
     - UsernameDisplay
@@ -50,12 +48,15 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.LayoutElement
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
@@ -138,6 +139,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 96
@@ -169,6 +172,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2252}
     - Class: 114
+      Script: {instanceID: 2378}
+    - Class: 114
       Script: {instanceID: 2436}
     - Class: 114
       Script: {instanceID: 2572}
@@ -185,11 +190,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2834}
     - Class: 114
-      Script: {instanceID: 2874}
-    - Class: 114
       Script: {instanceID: 2950}
-    - Class: 114
-      Script: {instanceID: 2960}
     - Class: 114
       Script: {instanceID: 3076}
     - Class: 114
@@ -208,6 +209,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3658}
     - Class: 114
       Script: {instanceID: 3750}
+    - Class: 114
+      Script: {instanceID: 3958}
+    - Class: 114
+      Script: {instanceID: 4206}
     - Class: 114
       Script: {instanceID: 4228}
     - Class: 114
@@ -771,7 +776,7 @@ ScriptsOnlyBuild:
     className: CursorSight
   - hash:
       serializedVersion: 2
-      Hash: 929bc3edb4bfc29d7e1e5a28318a151f
+      Hash: 09ff790ed1c0a2eab8ff43a684e4ff7e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HitDetection
@@ -915,7 +920,7 @@ ScriptsOnlyBuild:
     className: MouseLook
   - hash:
       serializedVersion: 2
-      Hash: fa94cc1fc6240271004762f41e618850
+      Hash: 9474beb305aad2389f3738df124eecaa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1513,8 +1518,26 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PhotonTeamsManager
+  - hash:
+      serializedVersion: 2
+      Hash: af72494300f3419128688e37269718db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenuCamera
+  - hash:
+      serializedVersion: 2
+      Hash: b5c18dc0bd934a1e5a7a15664b8e0e50
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 8f4dbb03a974cbbed84d184ea9d0c010
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/yunyu/Downloads/multiplayer/Game v2/Space Game (but multiplayer).exe
+  playerPath: C:/Users/yunyu/Downloads/multiplayer/Game v2.1/Space Game (but multiplayer).exe
