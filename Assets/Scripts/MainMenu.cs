@@ -9,10 +9,7 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenu;
-    public GameObject info;
-    public GameObject levels;
-    public GameObject settings;
+  
     public AudioMixer audioMixer;
     public AudioMixer sfxMixer;
     GameObject audioSlider;
@@ -20,10 +17,10 @@ public class MainMenu : MonoBehaviour
     public GameObject quality;
     GameObject fullscreenToggle;
 
-    public GameObject showLives;
-    Transform livesSlider;
-    Transform difficultySlider;
-    public GameObject showDifficulty;
+    //public GameObject showLives;
+    //Transform livesSlider;
+    //Transform difficultySlider;
+    //public GameObject showDifficulty;
     // public Slider volume;
     public TMP_Dropdown resolutionDropdown;
     //public GameObject[] selectLevel;
@@ -37,32 +34,28 @@ public class MainMenu : MonoBehaviour
         audioSlider = GameObject.Find("Slider");
         sfxSlider = GameObject.Find("Slider Sfx");
        // quality = GameObject.Find("Quality Dropdown");
-        mainMenu.SetActive(true);
-        info.SetActive(false);
-        levels.SetActive(false);
-        settings.SetActive(false);
 
-        if (PlayerPrefs.GetFloat("lives") == 0)
-        {
-            SetLives(3);
-        }
-        else
-        {
-            SetLives(PlayerPrefs.GetFloat("lives"));
-            livesSlider = showLives.transform.parent;
-            livesSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("lives");
-        }
+        //if (PlayerPrefs.GetFloat("lives") == 0)
+        //{
+        //    SetLives(3);
+        //}
+        //else
+        //{
+        //    SetLives(PlayerPrefs.GetFloat("lives"));
+        //    livesSlider = showLives.transform.parent;
+        //    livesSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("lives");
+        //}
 
-        if (PlayerPrefs.GetFloat("difficulty") == 0)
-        {
-            SetDifficulty(1);
-        }
-        else
-        {
-            SetDifficulty(PlayerPrefs.GetFloat("difficulty"));
-            difficultySlider = showDifficulty.transform.parent;
-            difficultySlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("difficulty");
-        }
+        //if (PlayerPrefs.GetFloat("difficulty") == 0)
+        //{
+        //    SetDifficulty(1);
+        //}
+        //else
+        //{
+        //    SetDifficulty(PlayerPrefs.GetFloat("difficulty"));
+        //    difficultySlider = showDifficulty.transform.parent;
+        //    difficultySlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("difficulty");
+        //}
         if(PlayerPrefs.GetInt("resolution") != 0)
         {
             resolutionDropdown.GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("resolution");
@@ -89,33 +82,7 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    private void Update()
-    {
 
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            BackButton();
-        }
-
-    }
-    public void PlayGame()
-    {
-
-        mainMenu.SetActive(false);
-        levels.SetActive(true);
-    }
-
-    public void Info()
-    {
-
-        mainMenu.SetActive(false);
-        info.SetActive(true);
-    }
-    public void Settings()
-    {
-        mainMenu.SetActive(false);
-        settings.SetActive(true);
-    }
 
     public void QuitGame()
     {
@@ -123,18 +90,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("game quit");
     }
 
-    public void BackButton()
-    {
-        if (!mainMenu.activeSelf)
-        {
-            mainMenu.SetActive(!mainMenu.activeSelf);
-            // gameObject.SetActive(!this.gameObject.activeSelf);
-            settings.SetActive(false);
-            info.SetActive(false);
-            levels.SetActive(false);
 
-        }
-    }
 
     public void GoToLevel()
     {
@@ -195,30 +151,30 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetFloat("lives", lives);
         Debug.Log(PlayerPrefs.GetFloat("lives"));
         PlayerPrefs.Save();
-        showLives.GetComponent<TMP_Text>().text = "Lives: " + PlayerPrefs.GetFloat("lives");
+        //showLives.GetComponent<TMP_Text>().text = "Lives: " + PlayerPrefs.GetFloat("lives");
     }
 
-    public void SetDifficulty(float hardness)
-    {
-        PlayerPrefs.SetFloat("difficulty", hardness);
-        Debug.Log(PlayerPrefs.GetFloat("difficulty"));
-        PlayerPrefs.Save();
-        switch (hardness)
-        {
-            case 1f:
-                showDifficulty.GetComponent<TMP_Text>().text = "Easy";
-                break;
-            case 2f:
-                showDifficulty.GetComponent<TMP_Text>().text = "Medium";
-                break;
-            case 3f:
-                showDifficulty.GetComponent<TMP_Text>().text = "Hard";
-                break;
-            default:
-                showDifficulty.GetComponent<TMP_Text>().text = "Difficulty not found";
-                break;
+    //public void SetDifficulty(float hardness)
+    //{
+    //    PlayerPrefs.SetFloat("difficulty", hardness);
+    //    Debug.Log(PlayerPrefs.GetFloat("difficulty"));
+    //    PlayerPrefs.Save();
+    //    switch (hardness)
+    //    {
+    //        case 1f:
+    //            showDifficulty.GetComponent<TMP_Text>().text = "Easy";
+    //            break;
+    //        case 2f:
+    //            showDifficulty.GetComponent<TMP_Text>().text = "Medium";
+    //            break;
+    //        case 3f:
+    //            showDifficulty.GetComponent<TMP_Text>().text = "Hard";
+    //            break;
+    //        default:
+    //            showDifficulty.GetComponent<TMP_Text>().text = "Difficulty not found";
+    //            break;
 
 
-        }
-    }
+    //    }
+    //}
 }

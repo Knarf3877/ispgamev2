@@ -40,6 +40,16 @@ public class MenuManager : MonoBehaviour
 		menu.Open();
 	}
 
+	private void Update()
+	{
+
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			OpenMenu("title");
+		}
+
+	}
+
 	public void CloseMenu(Menu menu)
 	{
 		menu.Close();

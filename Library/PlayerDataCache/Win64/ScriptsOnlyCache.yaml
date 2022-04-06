@@ -5,6 +5,8 @@ ScriptsOnlyBuild:
     - HitDetection
     - ItemCollection
     - Launcher
+    - MainMenu
+    - MainMenuCamera
     - Menu
     - MenuManager
     - PlayerController
@@ -36,11 +38,13 @@ ScriptsOnlyBuild:
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
+    - TMPro.TMP_Dropdown
     - TMPro.TMP_FontAsset
     - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshPro
     - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -58,7 +62,11 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Mask
     - UnityEngine.UI.RawImage
     - UnityEngine.UI.RectMask2D
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/Game.unity:
@@ -78,6 +86,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 43
       Script: {instanceID: 0}
+    - Class: 45
+      Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
     - Class: 64
@@ -90,19 +100,29 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
+    - Class: 111
+      Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 2176}
     - Class: 114
-      Script: {instanceID: 4580}
+      Script: {instanceID: 4352}
     - Class: 114
-      Script: {instanceID: 4764}
+      Script: {instanceID: 4584}
+    - Class: 114
+      Script: {instanceID: 4768}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 121
+      Script: {instanceID: 0}
+    - Class: 124
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
-    - Class: 258
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 850595691
       Script: {instanceID: 0}
@@ -122,6 +142,8 @@ ScriptsOnlyBuild:
     - Class: 33
       Script: {instanceID: 0}
     - Class: 43
+      Script: {instanceID: 0}
+    - Class: 45
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
@@ -149,6 +171,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
+    - Class: 111
+      Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 1510}
     - Class: 114
@@ -156,9 +180,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1606}
     - Class: 114
+      Script: {instanceID: 1698}
+    - Class: 114
       Script: {instanceID: 1720}
     - Class: 114
       Script: {instanceID: 1774}
+    - Class: 114
+      Script: {instanceID: 1786}
     - Class: 114
       Script: {instanceID: 1880}
     - Class: 114
@@ -186,6 +214,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2754}
     - Class: 114
+      Script: {instanceID: 2768}
+    - Class: 114
       Script: {instanceID: 2808}
     - Class: 114
       Script: {instanceID: 2834}
@@ -200,6 +230,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3214}
     - Class: 114
+      Script: {instanceID: 3220}
+    - Class: 114
       Script: {instanceID: 3322}
     - Class: 114
       Script: {instanceID: 3508}
@@ -208,35 +240,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3658}
     - Class: 114
-      Script: {instanceID: 3750}
+      Script: {instanceID: 3752}
     - Class: 114
-      Script: {instanceID: 3958}
+      Script: {instanceID: 3820}
     - Class: 114
-      Script: {instanceID: 4206}
+      Script: {instanceID: 3854}
     - Class: 114
-      Script: {instanceID: 4228}
+      Script: {instanceID: 3962}
     - Class: 114
-      Script: {instanceID: 4348}
+      Script: {instanceID: 4210}
     - Class: 114
-      Script: {instanceID: 4496}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 4516}
+      Script: {instanceID: 4352}
     - Class: 114
-      Script: {instanceID: 4732}
+      Script: {instanceID: 4388}
     - Class: 114
-      Script: {instanceID: 4856}
+      Script: {instanceID: 4500}
     - Class: 114
-      Script: {instanceID: 4858}
+      Script: {instanceID: 4520}
     - Class: 114
-      Script: {instanceID: 4898}
+      Script: {instanceID: 4736}
     - Class: 114
-      Script: {instanceID: 5032}
+      Script: {instanceID: 4860}
     - Class: 114
-      Script: {instanceID: 5056}
+      Script: {instanceID: 4862}
     - Class: 114
-      Script: {instanceID: 5126}
+      Script: {instanceID: 4902}
     - Class: 114
-      Script: {instanceID: 5276}
+      Script: {instanceID: 5036}
+    - Class: 114
+      Script: {instanceID: 5060}
+    - Class: 114
+      Script: {instanceID: 5130}
+    - Class: 114
+      Script: {instanceID: 5280}
+    - Class: 114
+      Script: {instanceID: 5388}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -956,6 +996,12 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 8f4dbb03a974cbbed84d184ea9d0c010
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
@@ -1020,6 +1066,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: PositionAsUV1
+  - hash:
+      serializedVersion: 2
+      Hash: af72494300f3419128688e37269718db
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenuCamera
   - hash:
       serializedVersion: 2
       Hash: 3c86090ed9d0522c260853bbd1e446ac
@@ -1520,24 +1572,12 @@ ScriptsOnlyBuild:
     className: PhotonTeamsManager
   - hash:
       serializedVersion: 2
-      Hash: af72494300f3419128688e37269718db
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MainMenuCamera
-  - hash:
-      serializedVersion: 2
-      Hash: b5c18dc0bd934a1e5a7a15664b8e0e50
+      Hash: 07fa860b333e17a084b3849d58c37b91
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
-  - hash:
-      serializedVersion: 2
-      Hash: 8f4dbb03a974cbbed84d184ea9d0c010
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PauseMenu
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Game.unity
-  playerPath: C:/Users/yunyu/Downloads/multiplayer/Game v2.1/Space Game (but multiplayer).exe
+  playerPath: C:/Users/yunyu/Downloads/multiplayer/Knarf Game/Space Game (but multiplayer).exe
