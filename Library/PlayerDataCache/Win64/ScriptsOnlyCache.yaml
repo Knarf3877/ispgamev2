@@ -986,7 +986,7 @@ ScriptsOnlyBuild:
     className: MouseLook
   - hash:
       serializedVersion: 2
-      Hash: 2180aa09a7752a55deb8ac5d4e5ef3b9
+      Hash: cd5f6ad2a0fa7c12ba666e661ac7b10e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -1598,7 +1598,7 @@ ScriptsOnlyBuild:
     className: PhotonTeamsManager
   - hash:
       serializedVersion: 2
-      Hash: 0a2853bd0b8defc6c2f3885a38589998
+      Hash: ac3250594c8111064ab44fbbf16fe279
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu

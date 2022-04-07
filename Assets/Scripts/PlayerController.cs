@@ -12,11 +12,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] Image healthbarImage, shieldbarImage;
-    [SerializeField] GameObject ui, pauseMenu, sfx, scoreText, weaponText, deathText, livesTest, fuelbarImage, throttlebarImage;
+    [SerializeField] GameObject ui, pauseMenu, sfx, scoreText, weaponText, deathText, fuelbarImage, throttlebarImage;
     [SerializeField] GameObject mainEngine, mainEngineInput, reverseEngine, reverseEngineInput, warpEngine;
     [SerializeField] GameObject cameraHolder;
 
     AudioSource warpSound;
+    public AudioClip hitSoundClip;
+    public AudioSource hitSound;
     float warpMaxVolume = 0.4f;
     bool isPaused = false;
 
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public Camera cam;
     public float staticCursorDistance = 500f;
     public Image activeCursor, staticCursor;
-
+    public GameObject gotDamagedScreen;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -204,7 +206,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         {
             ResumeGame();
         }
-
+        if (gotDamagedScreen.GetComponent<Image>().color.a > 0)
+        {
+            var color = gotDamagedScreen.GetComponent<Image>().color;
+            color.a -= .01f;
+            gotDamagedScreen.GetComponent<Image>().color = color;
+        }
     }
     void FixedUpdate()
     {
@@ -417,13 +424,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             PV.RPC("RPC_TrackKills", RpcTarget.Others, name);
         }
     }
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-        if (!PV.IsMine && targetPlayer == PV.Owner)
-        {
-            //EquipItem((int)changedProps["itemIndex"]);
-        }
-    }
+
     void PlayerWarp()
     {
         if (Input.GetKey(KeyCode.G) && warpFuel > 0 && throttle > 0)
@@ -476,7 +477,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         throttle = -.5f;
         Invoke("SetZero", 1.4f);
         Debug.Log("hit object");
-
+        var color = gotDamagedScreen.GetComponent<Image>().color;
+        color.a = .5f;
+        gotDamagedScreen.GetComponent<Image>().color = color;
         if (warping)
         {
             playerManager.Die();
@@ -537,6 +540,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     }
     public void TakeDamage(float damage)
     {
+        if (hitSound != null)
+            hitSound.PlayOneShot(hitSoundClip);
+        if (gotDamagedScreen != null)
+        {
+            var color = gotDamagedScreen.GetComponent<Image>().color;
+            color.a = .8f;
+            gotDamagedScreen.GetComponent<Image>().color = color;
+        }
+
         PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
     }
 

@@ -28,12 +28,6 @@ public class HitDetection : MonoBehaviourPunCallbacks
             transform.Rotate(Vector3.left * 90);
         }
     }
-    void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        // e.g. store this gameobject as this player's charater in Player.TagObject
-
-        Debug.Log(info);
-    }
 
     void Update()
     {
@@ -48,7 +42,7 @@ public class HitDetection : MonoBehaviourPunCallbacks
             Fire(transform.position, transform.rotation, laserForce, laserSpread);
 
 
-        MoveBullet(damage, name);
+        MoveBullet(damage);
 
     }
 
@@ -68,10 +62,9 @@ public class HitDetection : MonoBehaviourPunCallbacks
         destructionTime = Time.time + lifeTime;
         isFired = true;
 
-
     }
 
-    public void MoveBullet(float damage, string name)
+    public void MoveBullet(float damage)
     {
         RaycastHit rayHit;
         Ray velocityRay = new Ray(transform.position, velocity.normalized);
