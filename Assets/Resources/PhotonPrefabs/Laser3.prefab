@@ -135,10 +135,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explodeFX: {fileID: 4575031014204910254, guid: 6676450c25946364f81fb6a04134981d,
     type: 3}
+  flashFX: {fileID: 5988192417947619628, guid: 463ac838951874e45b39e3ba768580df, type: 3}
   lifeTime: 3
   hitMask:
     serializedVersion: 2
-    m_Bits: 33
+    m_Bits: 65
   laserForce: 900
   laserSpread: 3
   damage: 10

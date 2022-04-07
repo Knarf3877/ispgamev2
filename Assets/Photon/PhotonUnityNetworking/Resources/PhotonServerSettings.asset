@@ -35,6 +35,7 @@ MonoBehaviour:
   - DestroyRpc
   - RPC_Shoot
   - RPC_TakeDamage
+  - RPC_TrackKills
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

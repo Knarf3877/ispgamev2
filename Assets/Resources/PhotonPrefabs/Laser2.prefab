@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explodeFX: {fileID: 4575031014204910254, guid: b8dc0cba495a10c47a7fe5b98e39ff19,
     type: 3}
+  flashFX: {fileID: 216454317125157821, guid: 6cf38db24cf4b1e4d8d60681ed88bc52, type: 3}
   lifeTime: 5
   hitMask:
     serializedVersion: 2

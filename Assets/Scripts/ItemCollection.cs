@@ -59,29 +59,33 @@ public class ItemCollection : MonoBehaviour
             Debug.Log("You have: " + healthCount + " " + this.tag);
             Invoke("Initialize", waitTime);
         }
-        //else if (this.tag == "Ammo" && triggerCollider.tag == "Player")
-        //{
-        //    this.transform.position = itemPool;
-        //    ammoCount++;
-        //    switch (LaserFire.currentWeapon)
-        //    {
-        //        case 1:
-        //            LaserFire.laser1Ammo += 20;
-        //            LaserFire.currentWeaponAmmo += 20;
-        //            break;
-        //        case 2:
-        //            LaserFire.laser2Ammo += 20;
-        //            LaserFire.currentWeaponAmmo += 20;
-        //            break;
-        //        case 3:
-        //            LaserFire.laser3Ammo += 50;
-        //            LaserFire.currentWeaponAmmo += 50;
-        //            break;
-        //    }
-        //    Debug.Log("You have gained: " + ammoCount * 20 + " " + this.tag);
-        //    Invoke("Initialize", waitTime);
-        //}
-        
+        else if (this.tag == "Ammo" && triggerCollider.tag == "Player")
+        {
+            this.transform.position = itemPool;
+            ammoCount++;
+            switch (PlayerController.currentWeapon)
+            {
+                case 1:
+                    PlayerController.laser1Ammo += 20;
+                    PlayerController.currentWeaponAmmo += 20;
+                    break;
+                case 2:
+                    PlayerController.laser2Ammo += 20;
+                    PlayerController.currentWeaponAmmo += 20;
+                    break;
+                case 3:
+                    PlayerController.laser3Ammo += 50;
+                    PlayerController.currentWeaponAmmo += 50;
+                    break;
+                case 4:
+                    PlayerController.laser4Ammo += 20;
+                    PlayerController.currentWeaponAmmo += 50;
+                    break;
+            }
+            Debug.Log("You have gained: " + ammoCount * 20 + " " + this.tag);
+            Invoke("Initialize", waitTime);
+        }
+
     }
     void Initialize()
     {

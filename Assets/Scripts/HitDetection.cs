@@ -7,16 +7,17 @@ using UnityEngine.UI;
 using System.IO;
 public class HitDetection : MonoBehaviourPunCallbacks
 {
-    public ParticleSystem explodeFX;
+    [SerializeField] ParticleSystem explodeFX, flashFX;
     public float lifeTime = 4f;
     [SerializeField] LayerMask hitMask = -1;
 
     [SerializeField] float laserForce, laserSpread;
     private Vector3 velocity = Vector3.forward;
     private float destructionTime = 0f;
-     bool isFired = false;
+    bool isFired = false;
     private const float kVelocityMult = 1f;
     public float damage = 10f;
+
 
     [SerializeField] private bool adjustLaser;
 
@@ -26,6 +27,12 @@ public class HitDetection : MonoBehaviourPunCallbacks
         {
             transform.Rotate(Vector3.left * 90);
         }
+    }
+    void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        // e.g. store this gameobject as this player's charater in Player.TagObject
+
+        Debug.Log(info);
     }
 
     void Update()
@@ -41,12 +48,14 @@ public class HitDetection : MonoBehaviourPunCallbacks
             Fire(transform.position, transform.rotation, laserForce, laserSpread);
 
 
-            MoveBullet(damage);
+        MoveBullet(damage, name);
 
     }
 
     void Fire(Vector3 position, Quaternion rotation, float muzzleVelocity, float spread)
     {
+        ParticleSystem tempFX = Instantiate(flashFX, transform.position, transform.rotation);
+        Destroy(tempFX.gameObject, 1f);
         transform.position = position + transform.forward * 6f;
         Vector3 spreadAngle = Vector3.zero;
         spreadAngle.x = Random.Range(-spread, spread);
@@ -59,9 +68,10 @@ public class HitDetection : MonoBehaviourPunCallbacks
         destructionTime = Time.time + lifeTime;
         isFired = true;
 
+
     }
 
-    public void MoveBullet(float damage)
+    public void MoveBullet(float damage, string name)
     {
         RaycastHit rayHit;
         Ray velocityRay = new Ray(transform.position, velocity.normalized);
@@ -98,6 +108,7 @@ public class HitDetection : MonoBehaviourPunCallbacks
             Destroy(tempExplodeFX.gameObject, 1f);
 
         }
+
         Destroy(gameObject);
     }
     /*    private void OnCollisionEnter(Collision collision)

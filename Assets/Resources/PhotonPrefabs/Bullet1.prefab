@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explodeFX: {fileID: 4575031014204910254, guid: 6676450c25946364f81fb6a04134981d,
     type: 3}
+  flashFX: {fileID: 5084004093288587426, guid: fce673eca10f2e34b9b0efcb34ec9207, type: 3}
   lifeTime: 4
   hitMask:
     serializedVersion: 2

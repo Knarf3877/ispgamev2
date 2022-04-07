@@ -10,20 +10,19 @@ public class PlayerManager : MonoBehaviour
 	PhotonView PV;
 
 	GameObject controller;
-
 	Player[] allPlayers;
 	int myNumberInRoom;
 
 
 	void Start()
 	{
-		
 		PV = GetComponent<PhotonView>();
 		myNumberInRoom = PV.ViewID % SpawnManager.Instance.spawnpoints.Length;
 		if (PV.IsMine)
 		{
 			CreateController();
 		}
+		
 	}
 
 
@@ -36,7 +35,10 @@ public class PlayerManager : MonoBehaviour
 
 	public void Die()
 	{
+		
 		PhotonNetwork.Destroy(controller);
-		CreateController();
+		PlayerController.deaths += 1;
+		Invoke("CreateController", 2f);
+
 	}
 }

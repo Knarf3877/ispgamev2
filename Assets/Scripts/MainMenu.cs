@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public AudioMixer sfxMixer;
     GameObject audioSlider;
     GameObject sfxSlider;
+    public GameObject settings;
     public GameObject quality;
     GameObject fullscreenToggle;
 
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
     //Transform livesSlider;
     //Transform difficultySlider;
     //public GameObject showDifficulty;
-    // public Slider volume;
+    public Slider volume;
     public TMP_Dropdown resolutionDropdown;
     //public GameObject[] selectLevel;
     int[] resolutionsWidth = { 720, 960, 1280, 1600, 1800, 1920 };
@@ -29,6 +30,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        settings.SetActive(true);
         AudioListener.pause = false;
         fullscreenToggle = GameObject.Find("Fullscreen Toggle");
         audioSlider = GameObject.Find("Slider");
@@ -71,15 +73,16 @@ public class MainMenu : MonoBehaviour
             quality.GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("quality") - 1;
         }
         if (PlayerPrefs.GetFloat("MasterVolume") != 0){
-           // audioSlider = GameObject.Find("Slider");
+            audioSlider = GameObject.Find("Slider");
             audioSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("MasterVolume");
         }
         if (PlayerPrefs.GetFloat("SFXVolume") != 0)
         {
-            //sfxSlider = GameObject.Find("Slider Sfx");
+            sfxSlider = GameObject.Find("Slider Sfx");
             sfxSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("SFXVolume");
+            Debug.Log(PlayerPrefs.GetFloat("SFXVolume"));
         }
-
+        settings.SetActive(false);
     }
 
 
@@ -133,7 +136,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetVolume(float value)
     {
-       // Debug.Log(value);
+        Debug.Log(value);
         audioMixer.SetFloat("MasterVolume", value);
         PlayerPrefs.SetFloat("MasterVolume", value);
         PlayerPrefs.Save();
@@ -142,6 +145,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetSFXVolume(float value)
     {
+        Debug.Log(value);
         sfxMixer.SetFloat("SFXVolume", value);
         PlayerPrefs.SetFloat("SFXVolume", value);
         PlayerPrefs.Save();

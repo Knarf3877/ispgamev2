@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
 	void Awake()
 	{
 		Instance = this;
+		PlayerController.deaths = 0;
 	}
 
 	public void OpenMenu(string menuName)

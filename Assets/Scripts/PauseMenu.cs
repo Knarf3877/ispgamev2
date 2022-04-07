@@ -23,7 +23,6 @@ public class PauseMenu : MonoBehaviour
         if (winMenu.activeSelf == true)
             winMenu.SetActive(false);
 
-
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
         isPaused = false;

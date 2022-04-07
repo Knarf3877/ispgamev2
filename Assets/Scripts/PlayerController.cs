@@ -7,16 +7,18 @@ using UnityEngine.UI;
 using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] Image healthbarImage, shieldbarImage;
-    [SerializeField] GameObject ui, sfx, scoreText, weaponText, livesTest, fuelbarImage, throttlebarImage;
+    [SerializeField] GameObject ui, pauseMenu, sfx, scoreText, weaponText, deathText, livesTest, fuelbarImage, throttlebarImage;
     [SerializeField] GameObject mainEngine, mainEngineInput, reverseEngine, reverseEngineInput, warpEngine;
     [SerializeField] GameObject cameraHolder;
 
     AudioSource warpSound;
     float warpMaxVolume = 0.4f;
+    bool isPaused = false;
 
     [SerializeField] GameObject leftBarrel, rightBarrel, mainBarrel, mainBarrel2, mainBarrel3;
     Vector3 shootFromBarrel;
@@ -24,12 +26,12 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     static public int currentWeapon;
     static public int currentWeaponAmmo;
     private float timeLastFired;
+    bool canFire = true;
 
-
-    public int laser1Ammo = 100;
-    public int laser2Ammo = 50;
-    public int laser3Ammo = 200;
-    public int laser4Ammo = 50;
+    static public int laser1Ammo = 100;
+    static public int laser2Ammo = 50;
+    static public int laser3Ammo = 200;
+    static public int laser4Ammo = 50;
     public int defaultLaser1Ammo;
     public int defaultLaser2Ammo;
     public int defaultLaser3Ammo;
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     float laser4FireRate = .5f;
 
 
-
+    static public int deaths = 0;
 
     Rigidbody rb;
 
@@ -100,6 +102,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
     public Camera cam;
     public float staticCursorDistance = 500f;
     public Image activeCursor, staticCursor;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -110,16 +113,19 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
     void Start()
     {
+        AudioListener.pause = false;
+        isPaused = false;
         if (PV.IsMine)
         {
-            
+
         }
         else
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
-            
+
             Destroy(rb);
             Destroy(ui);
+            Destroy(pauseMenu);
             Destroy(sfx);
         }
         screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -148,6 +154,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         warpSound.volume = warpMaxVolume;
         warpSound.mute = true;
         warpSound.Play();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+        canFire = true;
     }
 
     void Update()
@@ -184,7 +193,17 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             mainEngineInput.SetActive(false);
             reverseEngineInput.SetActive(false);
         }
-        FireWeapon();
+        if (canFire)
+            FireWeapon();
+        if (Input.GetKeyDown(KeyCode.Escape) && isPaused == false)
+        {
+            PauseGame();
+            Debug.Log("game paused");
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused != false)
+        {
+            ResumeGame();
+        }
 
     }
     void FixedUpdate()
@@ -236,7 +255,50 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
     }
 
+    public void PauseGame()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        pauseMenu.SetActive(true);
+        ui.SetActive(false);
+        isPaused = true;
+        AudioListener.pause = true;
+        rb.freezeRotation = true;
+        canFire = false;
+    }
+    public void ResumeGame()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        pauseMenu.SetActive(false);
+        ui.SetActive(true);
+        isPaused = false;
+        AudioListener.pause = false;
+        Debug.Log("Resue ");
+        rb.freezeRotation = false;
+        canFire = true;
+    }
 
+    public void QuitGame()
+    {
+        pauseMenu.SetActive(false);
+        ui.SetActive(true);
+        isPaused = false;
+        rb.freezeRotation = false;
+        AudioListener.pause = false;
+        canFire = true;
+        Debug.Log("Quit");
+        StartCoroutine(Disconnect());
+    }
+
+    IEnumerator Disconnect()
+    {
+        PhotonNetwork.Disconnect();
+
+        while (PhotonNetwork.InRoom)
+            yield return null;
+        SceneManager.LoadScene(0);
+    }
 
     void SetZero()
     {
@@ -255,7 +317,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         transform.Rotate(Vector3.zero);
 
     }
-
 
     void FireWeapon()
     {
@@ -330,9 +391,9 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                     break;
             }
         }
-    }
 
-    public void ApplyDamage(float damage)
+    }
+    public void ApplyDamage(float damage, string name)
     {
 
         if (isImmune == false)
@@ -353,6 +414,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         if (currentHealth <= 0)
         {
             playerManager.Die();
+            PV.RPC("RPC_TrackKills", RpcTarget.Others, name);
         }
     }
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -362,7 +424,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             //EquipItem((int)changedProps["itemIndex"]);
         }
     }
-
     void PlayerWarp()
     {
         if (Input.GetKey(KeyCode.G) && warpFuel > 0 && throttle > 0)
@@ -410,7 +471,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
 
     }
-
     void OnCollisionEnter(Collision collision)
     {
         throttle = -.5f;
@@ -480,7 +540,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
     }
 
-
     [PunRPC]
     void RPC_TakeDamage(float damage)
     {
@@ -505,6 +564,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         if (currentHealth <= 0)
         {
             playerManager.Die();
+
         }
     }
     void updateHUD()
@@ -512,13 +572,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         scoreText.GetComponent<Text>().text = totalSpeed.ToString("F0") + " mph" +
             //   "\n" + avgFrameRate + " fps" +
             "\n" + warpFuel.ToString("F0") + " : fuel left" +
-            "\n" + throttle.ToString("F3")
+            "\n" + throttle.ToString("F3") 
         ;
         weaponText.GetComponent<TextMeshProUGUI>().text = WeaponName(currentWeapon) +
            "\n" + currentWeaponAmmo.ToString("F0");
+        deathText.GetComponent<TextMeshProUGUI>().text = "Deaths: " + deaths.ToString("F0");
         healthbarImage.fillAmount = currentHealth / 100;
         shieldbarImage.fillAmount = currentShield / 100;
-        throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", throttle);
+        throttlebarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", Mathf.Abs(throttle));
         fuelbarImage.GetComponent<Renderer>().material.SetFloat("_FillAmount", warpFuel / 200);
     }
     string WeaponName(int weaponNum)
@@ -530,7 +591,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
 
             case 2:
                 return "Type 2";
-             
+
             case 3:
                 return "Type 3";
 
@@ -579,6 +640,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
                 laser1FXRight.Play();
                 break;
         }
+
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Laser1"), shootFromBarrel, leftBarrel.transform.rotation);
         UseAmmo(1);
     }
@@ -604,7 +666,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
         }
         UseAmmo(4);
     }
-
     void UseAmmo(int currentWeapon)
     {
         if (infiniteAmmo == false)
@@ -628,7 +689,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IDamageable
             currentWeaponAmmo--;
         }
     }
-
     public void LateUpdate()
     {
         if (player != null && cam != null)
